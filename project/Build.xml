@@ -34,6 +34,8 @@
 
 
 <target id="std" output="${LIBPREFIX}std${DBG}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
+  <!-- <ext value=".ndll" unless="mobile"/>
+  <ext value=".a" if="emscripten"/> -->
   <files id="std"/>
   <lib name="wsock32.lib" if="windows"/>
   <outdir name="../bin/${BINDIR}"/>
@@ -76,8 +78,8 @@
 
 
 <target id="regexp" output="${LIBPREFIX}regexp${DBG}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
-  <ext value=".ndll" unless="mobile"/>
-  <ext value=".a" if="emscripten"/>
+  <!-- <ext value=".ndll" unless="mobile"/>
+  <ext value=".a" if="emscripten"/> -->
   <files id="regexp"/>
   <outdir name="../bin/${BINDIR}"/>
 </target>
@@ -110,14 +112,14 @@
 
 
 <target id="zlib" output="${LIBPREFIX}zlib${DBG}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
-  <ext value=".ndll" unless="mobile"/>
-  <ext value=".a" if="emscripten"/>
+  <!-- <ext value=".ndll" unless="mobile"/>
+  <ext value=".a" if="emscripten"/> -->
   <files id="zlib"/>
   <outdir name="../bin/${BINDIR}"/>
 </target>
 
 <files id="nekoapi" dir="${RUNTIME}">
-  <ext value=".ndll" unless="mobile"/>
+  <!-- <ext value=".ndll" unless="mobile"/> -->
   <depend name="libs/nekoapi/neko.h"/>
   <depend name="${HXCPP}/include/hx/Macros.h"/>
   <depend name="${HXCPP}/include/hx/CFFI.h"/>
@@ -130,7 +132,7 @@
 <set name="neko_v2" value="1" unless="neko_v1" />
 
 <target id="nekoapi" output="nekoapi" tool="linker" toolid="dll">
-  <ext value=".ndll"/>
+  <!-- <ext value=".ndll"/> -->
   <files id="nekoapi"/>
   <lib name="${RUNTIME}/libs/nekoapi/neko.lib" if="windows" unless="neko_v2" />
   <lib name="${RUNTIME}/libs/nekoapi/neko2.lib" if="windows" unless="neko_v1" />

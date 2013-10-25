@@ -321,17 +321,17 @@ void *__hxcpp_get_proc_address(String inLib, String full_name,bool inNdllProc)
 
    String ext =
 #if defined(_WIN32)
-    HX_CSTRING(".ndll");
+    HX_CSTRING(".dll");
 #elif defined(IPHONEOS)
     HX_CSTRING(".ios.dylib");
 #elif defined(IPHONESIM)
     HX_CSTRING(".sim.dylib");
 #elif defined(__APPLE__)
-    HX_CSTRING(".ndll");
+    HX_CSTRING(".dylib");
 #elif defined(ANDROID) || defined(GPH) || defined(WEBOS)  || defined(BLACKBERRY) || defined(EMSCRIPTEN)
     HX_CSTRING(".so");
 #else
-    HX_CSTRING(".ndll");
+    HX_CSTRING(".dso");
 #endif
 
 
