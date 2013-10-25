@@ -19,8 +19,8 @@
 #else // NOT NEKO_WINDOWS
 
 #ifdef NEKO_LINUX
-#define EXT "dso"
-#define NEKO_EXT "so"
+#define EXT "ndll"
+#define NEKO_EXT "ndll"
 //#define __USE_GNU 1
 #else
 #if defined(ANDROID) || defined(BLACKBERRY)
@@ -29,8 +29,8 @@
 #define EXT "ll"
 #else
 #include <mach-o/dyld.h>
-#define EXT "dylib"
-#define NEKO_EXT "dylib"
+#define EXT "ndll"
+#define NEKO_EXT "ndll"
 #endif
 #endif
 

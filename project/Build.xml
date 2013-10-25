@@ -76,6 +76,8 @@
 
 
 <target id="regexp" output="${LIBPREFIX}regexp${DBG}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
+  <ext value=".ndll" unless="mobile"/>
+  <ext value=".a" if="emscripten"/>
   <files id="regexp"/>
   <outdir name="../bin/${BINDIR}"/>
 </target>
@@ -108,11 +110,14 @@
 
 
 <target id="zlib" output="${LIBPREFIX}zlib${DBG}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
+  <ext value=".ndll" unless="mobile"/>
+  <ext value=".a" if="emscripten"/>
   <files id="zlib"/>
   <outdir name="../bin/${BINDIR}"/>
 </target>
 
 <files id="nekoapi" dir="${RUNTIME}">
+  <ext value=".ndll" unless="mobile"/>
   <depend name="libs/nekoapi/neko.h"/>
   <depend name="${HXCPP}/include/hx/Macros.h"/>
   <depend name="${HXCPP}/include/hx/CFFI.h"/>
