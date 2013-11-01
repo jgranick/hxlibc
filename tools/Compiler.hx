@@ -2,7 +2,6 @@ package;
 
 
 import haxe.io.Path;
-import sys.io.File;
 import sys.FileSystem;
 
 
@@ -180,7 +179,7 @@ class Compiler {
 			
 			// Create a temp file for including ...
 			var tmp_cpp = dir + inHeader + ".cpp";
-			var file = File.write (tmp_cpp, false);
+			var file = sys.io.File.write (tmp_cpp, false);
 			file.writeString ("#include <" + inHeader + ".h>\n");
 			file.close ();
 			
@@ -199,7 +198,7 @@ class Compiler {
 		Sys.println ("Creating " + pch_name + "...");
 		Sys.println (mExe + " " + args.join (" "));
 		
-		var result = BuildTool.runCommand (mExe, args);
+		var result = Tools.runCommand (mExe, args);
 		
 		if (result != 0) {
 			
