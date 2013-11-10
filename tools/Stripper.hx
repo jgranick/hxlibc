@@ -31,7 +31,8 @@ class Stripper {
 		
 		if (result != 0) {
 			
-			throw "Error : " + result + " - build cancelled";
+			Sys.exit (result);
+			//throw "Error : " + result + " - build cancelled";
 			
 		}
 		

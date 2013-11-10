@@ -2,6 +2,7 @@ package;
 
 
 import haxe.io.Eof;
+import helpers.LogHelper;
 import sys.io.Process;
 import sys.FileSystem;
 
@@ -19,7 +20,7 @@ class Setup {
 			
 		} catch (e:Dynamic) {
 			
-			throw 'ANDROID_NDK_DIR "$inDir" does not point to a valid directory.';
+			LogHelper.error ('ANDROID_NDK_DIR "$inDir" does not point to a valid directory');
 			
 		}
 		
@@ -56,7 +57,7 @@ class Setup {
 		
 		if (result == "") {
 			
-			throw 'ANDROID_NDK_DIR "$inDir" does not contain matching ndk downloads.'; 
+			LogHelper.error ('ANDROID_NDK_DIR "$inDir" does not contain matching NDK downloads'); 
 			
 		}
 		
@@ -160,7 +161,7 @@ class Setup {
 			
 		} else {
 			
-			throw 'Unknown setup feature $inWhat';
+			LogHelper.error ('Unknown setup feature "$inWhat"');
 			
 		}
 		
@@ -186,7 +187,7 @@ class Setup {
 				
 			} else {
 				
-				throw "ANDROID_NDK_ROOT or ANDROID_NDK_DIR should be set";
+				LogHelper.error ("Could not find ANDROID_NDK_ROOT or ANDROID_NDK_DIR variable");
 				
 			}
 			
@@ -384,7 +385,7 @@ class Setup {
 					
 				}
 				
-				throw ("Could not automatically setup MSVC");
+				LogHelper.error ("Could not automatically setup MSVC");
 				
 			}
 			

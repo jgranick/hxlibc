@@ -2,6 +2,7 @@ package;
 
 
 import haxe.io.Path;
+import helpers.LogHelper;
 import helpers.PathHelper;
 import helpers.ProcessHelper;
 import sys.FileSystem;
@@ -150,7 +151,8 @@ class Compiler {
 				
 			}
 			
-			throw "Error : " + result + " - build cancelled";
+			Sys.exit (result);
+			//throw "Error : " + result + " - build cancelled";
 			
 		}
 		
@@ -210,7 +212,7 @@ class Compiler {
 				
 			}
 			
-			throw "Error creating pch: " + result + " - build cancelled";
+			LogHelper.error ("Could not create PCH");
 			
 		}
 		

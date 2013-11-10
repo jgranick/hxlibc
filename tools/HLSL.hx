@@ -2,6 +2,7 @@ package;
 
 
 import haxe.io.Path;
+import helpers.LogHelper;
 import helpers.PathHelper;
 import helpers.ProcessHelper;
 import sys.FileSystem;
@@ -53,7 +54,7 @@ class HLSL {
 			
 			if (result != 0) {
 				
-				throw "Error : Could not compile shader " + file + " - build cancelled";
+				LogHelper.error ("Could not compile shader \"" + file + "\"");
 				
 			}
 			

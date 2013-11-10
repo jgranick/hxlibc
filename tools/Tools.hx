@@ -3,6 +3,7 @@ package;
 
 import haxe.io.Path;
 import haxe.xml.Fast;
+import helpers.LogHelper;
 import helpers.PathHelper;
 import helpers.ProcessHelper;
 import project.Haxelib;
@@ -76,13 +77,13 @@ class Tools {
 		// Sys.println("Build : " + inTarget );
 		if (!mTargets.exists(inTarget)) {
 			
-			throw "Could not find target '" + inTarget + "' to build.";
+			LogHelper.error ("Could not find build target \"" + inTarget + "\"");
 			
 		}
 		
 		if (mCompiler == null) {
 			
-			throw "No compiler defined";
+			LogHelper.error ("No compiler defined for the current build target");
 			
 		}
 		
@@ -218,7 +219,8 @@ class Tools {
 					var result = Thread.readMessage (true);
 					if (result == "Error") {
 						
-						throw "Error in building thread";
+						Sys.exit (1);
+						//throw "Error in building thread";
 						
 					}
 					
@@ -234,7 +236,7 @@ class Tools {
 				
 				if (!mLinkers.exists (target.mToolID)) {
 					
-					throw "Missing linker :\"" + target.mToolID + "\"";
+					LogHelper.error ("Could not find linker for \"" + target.mToolID + "\"");
 					
 				}
 				
@@ -307,13 +309,13 @@ class Tools {
 							
 						} else if (!el.has.noerror) {
 							
-							throw "Could not find include file " + name;
+							LogHelper.error ("Could not find include file \"" + name + "\"");
 							
 						}
 					
 					default:
 						
-						throw "Unknown compiler option: '" + el.name + "'";
+						LogHelper.error ("Unknown compiler option \"" + el.name + "\"");
 					
 				}
 				
@@ -663,7 +665,7 @@ class Tools {
 			
 			if (!defines.exists ("HXCPP")) {
 				
-				throw "HXCPP not set, and not run from haxelib";
+				LogHelper.error ("Please run hxlibc using haxelib");
 				
 			}
 			
@@ -749,7 +751,7 @@ class Tools {
 					
 				} else {
 					
-					throw "Unknown android host:" + os;
+					LogHelper.error ("Unknown android host \"" + os + "\"");
 					
 				}
 				
@@ -1029,7 +1031,7 @@ class Tools {
 					case "error":
 						
 						var error = substitute (el.att.value);
-						throw (error);
+						LogHelper.error (error);
 					
 					case "path":
 						
@@ -1089,7 +1091,7 @@ class Tools {
 							
 						} else if (!el.has.noerror) {
 							
-							throw "Could not find include file " + name;
+							LogHelper.error ("Could not find include file \"" + name + "\"");
 							
 						}
 					

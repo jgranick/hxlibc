@@ -2,6 +2,7 @@ package;
 
 
 import haxe.io.Path;
+import helpers.LogHelper;
 import helpers.PathHelper;
 import sys.FileSystem;
 
@@ -97,7 +98,7 @@ class FileGroup {
 		
 		if (mMissingDepends.length > 0) {
 			
-			throw "Could not find dependencies: " + mMissingDepends.join (",");
+			LogHelper.error ("Could not find dependencies: [ " + mMissingDepends.join (", ") + " ]");
 			
 		}
 		

@@ -1,6 +1,7 @@
 package;
 
 
+import helpers.LogHelper;
 import helpers.PathHelper;
 import helpers.ProcessHelper;
 import sys.io.File;
@@ -52,7 +53,7 @@ class Linker {
 			
 			if (!FileSystem.exists (obj)) {
 				
-				throw "Could not find " + obj + " required by " + inName;
+				LogHelper.error ("Could not find \"" + obj + "\" required by \"" + inName + "\"");
 				
 			}
 			
@@ -82,7 +83,7 @@ class Linker {
 			
 		} catch (e:Dynamic) {
 			
-			throw "Unable to create output directory " + inTarget.mOutputDir;
+			LogHelper.error ("Unable to create output directory \"" + inTarget.mOutputDir + "\"");
 			
 		}
 		
@@ -151,7 +152,8 @@ class Linker {
 			
 			if (result != 0) {
 				
-				throw "Error : " + result + " - build cancelled";
+				Sys.exit (result);
+				//throw "Error : " + result + " - build cancelled";
 				
 			}
 			
@@ -163,7 +165,8 @@ class Linker {
 				
 				if (result != 0) {
 					
-					throw "Error : " + result + " - build cancelled";
+					Sys.exit (result);
+					//throw "Error : " + result + " - build cancelled";
 					
 				}
 				

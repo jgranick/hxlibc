@@ -1,5 +1,6 @@
 package;
 
+import helpers.LogHelper;
 import sys.FileSystem;
 
 
@@ -46,7 +47,7 @@ class File {
 		
 		if (!FileSystem.exists (source_name)) {
 			
-			throw "Could not find source '" + source_name + "'";
+			LogHelper.error ("Could not find source file \"" + source_name + "\"");
 			
 		}
 		
@@ -62,7 +63,7 @@ class File {
 			
 			if (!FileSystem.exists (depend)) {
 				
-				throw "Could not find dependency '" + depend + "' for '" + mName + "'";
+				LogHelper.error ("Could not find dependency \"" + depend + "\" for \"" + mName + "\"");
 				
 			}
 			

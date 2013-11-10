@@ -1,6 +1,7 @@
 package;
 
 
+import helpers.LogHelper;
 import helpers.PathHelper;
 
 
@@ -61,7 +62,7 @@ class Target {
 		
 		if (mErrors.length > 0) {
 			
-			throw mErrors.join ("/");
+			LogHelper.error (mErrors.join (", "));
 			
 		}
 		
