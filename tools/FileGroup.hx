@@ -47,8 +47,23 @@ class FileGroup {
 		
 		if (!FileSystem.exists (inFile)) {
 			
-			mMissingDepends.push (inFile);
-			return;
+			if (StringTools.startsWith (inFile, Tools.HXCPP) && inFile.indexOf ("build-tool/") > -1) {
+				
+				inFile = StringTools.replace (inFile, "build-tool/", "toolchain/");
+				
+				if (!FileSystem.exists (inFile)) {
+					
+					mMissingDepends.push (inFile);
+					return;
+					
+				}
+				
+			} else {
+				
+				mMissingDepends.push (inFile);
+				return;
+				
+			}
 			
 		}
 		

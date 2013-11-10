@@ -495,7 +495,13 @@ class Tools {
 	
 	private function findIncludeFile (inBase:String):String {
 		
-		if (inBase == "") return "";
+		if (inBase == null || inBase == "") return "";
+		
+		if (StringTools.startsWith (inBase, HXCPP) && StringTools.endsWith (inBase, "BuildCommon.xml")) {
+			
+			inBase = HXCPP + "/toolchain/BuildCommon.xml";
+			
+		}
 		
 		var c0 = inBase.substr (0,1);
 		
@@ -680,7 +686,7 @@ class Tools {
 			
 		}
 		
-		include_path.push (HXCPP + "/build-tool");
+		include_path.push (HXCPP + "/toolchain");
 		
 		var m64 = defines.exists ("HXCPP_M64");
 		var msvc = false;
@@ -699,7 +705,15 @@ class Tools {
 			
 		}
 		
-		if (defines.exists ("iphoneos")) {
+		if (defines.exists ("toolchain")) {
+			
+			if (!defines.exists ("BINDIR")) {
+				
+				defines.set ("BINDIR", Path.withoutDirectory (Path.withoutExtension (defines.get ("toolchain"))));
+				
+			}
+			
+		} else if (defines.exists ("iphoneos")) {
 			
 			defines.set ("toolchain", "iphoneos");
 			defines.set ("iphone", "iphone");

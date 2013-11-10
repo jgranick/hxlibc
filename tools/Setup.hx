@@ -98,7 +98,7 @@ class Setup {
 		
 		if (Tools.HXCPP != "") {
 			
-			var src = toPath (Tools.HXCPP + "/build-tool/example.hxcpp_config.xml");
+			var src = toPath (Tools.HXCPP + "/toolchain/example.hxcpp_config.xml");
 			
 			if (!FileSystem.exists (config)) {
 				
@@ -328,7 +328,7 @@ class Setup {
 		if (!ioDefines.exists ("NO_AUTO_MSVC")) {
 			
 			var extra = in64 ? "64" : "";
-			var vc_setup_proc = new Process ("cmd.exe", [ "/C", Tools.HXCPP + "\\build-tool\\msvc" + extra + "-setup.bat" ]);
+			var vc_setup_proc = new Process ("cmd.exe", [ "/C", Tools.HXCPP + "\\toolchain\\msvc" + extra + "-setup.bat" ]);
 			var vars_found = false;
 			var error_found = false;
 			var output = new Array<String> ();
