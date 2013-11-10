@@ -2,6 +2,7 @@ package;
 
 
 import haxe.io.Path;
+import helpers.PathHelper;
 import sys.FileSystem;
 
 
@@ -119,7 +120,7 @@ class FileGroup {
 				
 				if (!skip) {
 					
-					DirManager.make (inObjDir);
+					PathHelper.mkdir (inObjDir);
 					var stream = sys.io.File.write (dest, true);
 					stream.writeString (contents);
 					stream.close ();

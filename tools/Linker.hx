@@ -1,6 +1,8 @@
 package;
 
 
+import helpers.PathHelper;
+import helpers.ProcessHelper;
 import sys.io.File;
 import sys.FileSystem;
 
@@ -74,7 +76,11 @@ class Linker {
 		var ext = (inTarget.mExt == "" ? mExt : inTarget.mExt);
 		var file_name = mNamePrefix + inTarget.mOutput + ext;
 		
-		if (!DirManager.make (inTarget.mOutputDir)) {
+		try {
+			
+			PathHelper.mkdir (inTarget.mOutputDir);
+			
+		} catch (e:Dynamic) {
 			
 			throw "Unable to create output directory " + inTarget.mOutputDir;
 			
@@ -99,7 +105,7 @@ class Linker {
 			
 			if (mLibDir != "") {
 				
-				DirManager.make (mLibDir);
+				PathHelper.mkdir (mLibDir);
 				args.push (out + mLibDir + "/" + file_name);
 				
 			} else {
@@ -141,7 +147,7 @@ class Linker {
 			
 			Sys.println (mExe + " " + args.join (" "));
 			
-			var result = Tools.runCommand (mExe, args);
+			var result = ProcessHelper.runCommand ("", mExe, args);
 			
 			if (result != 0) {
 				
@@ -153,7 +159,7 @@ class Linker {
 				
 				args = [out_name];
 				Sys.println (mRanLib + " " + args.join (" "));
-				var result = Tools.runCommand (mRanLib, args);
+				var result = ProcessHelper.runCommand ("", mRanLib, args);
 				
 				if (result != 0) {
 					

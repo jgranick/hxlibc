@@ -2,6 +2,8 @@ package;
 
 
 import haxe.io.Path;
+import helpers.PathHelper;
+import helpers.ProcessHelper;
 import sys.FileSystem;
 
 
@@ -138,7 +140,7 @@ class Compiler {
 		
 		Sys.println (mExe + " " + args.join (" "));
 		
-		var result = Tools.runCommand (mExe, args);
+		var result = ProcessHelper.runCommand ("", mExe, args);
 		
 		if (result != 0) {
 			
@@ -171,7 +173,7 @@ class Compiler {
 		var dir = inObjDir + "/" + inGroup.getPchDir () + "/";
 		var pch_name = dir + inHeader + mPCHExt;
 		
-		DirManager.make (dir);
+		PathHelper.mkdir (dir);
 		
 		if (mPCH != "gcc") {
 			
@@ -198,7 +200,7 @@ class Compiler {
 		Sys.println ("Creating " + pch_name + "...");
 		Sys.println (mExe + " " + args.join (" "));
 		
-		var result = Tools.runCommand (mExe, args);
+		var result = ProcessHelper.runCommand ("", mExe, args);
 		
 		if (result != 0) {
 			

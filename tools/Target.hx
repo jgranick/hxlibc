@@ -1,6 +1,9 @@
 package;
 
 
+import helpers.PathHelper;
+
+
 class Target {
 	
 	
@@ -70,7 +73,7 @@ class Target {
 		for (dir in mDirs) {
 			
 			Sys.println ("Remove " + dir + "...");
-			DirManager.deleteRecurse (dir);
+			PathHelper.removeDirectory (dir);
 			
 		}
 		

@@ -2,6 +2,8 @@ package;
 
 
 import haxe.io.Path;
+import helpers.PathHelper;
+import helpers.ProcessHelper;
 import sys.FileSystem;
 
 
@@ -28,11 +30,11 @@ class HLSL {
 		
 		if (!FileSystem.exists (Path.directory (target)))  {
 			
-			DirManager.make (Path.directory (target));
+			PathHelper.mkdir (Path.directory (target));
 			
 		}
 		
-		DirManager.makeFileDir (target);
+		//DirManager.makeFileDir (target);
 		
 		var srcStamp = FileSystem.stat (file).mtime.getTime ();
 		
@@ -47,7 +49,7 @@ class HLSL {
 				
 			}
 			
-			var result = Tools.runCommand (exe, args);
+			var result = ProcessHelper.runCommand ("", exe, args);
 			
 			if (result != 0) {
 				

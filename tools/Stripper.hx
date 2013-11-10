@@ -1,6 +1,9 @@
 package;
 
 
+import helpers.ProcessHelper;
+
+
 class Stripper {
 	
 	
@@ -24,7 +27,7 @@ class Stripper {
 		
 		Sys.println (mExe + " " + args.join (" "));
 		
-		var result = Tools.runCommand (mExe, args);
+		var result = ProcessHelper.runCommand ("", mExe, args);
 		
 		if (result != 0) {
 			

@@ -3,6 +3,9 @@ package;
 
 import haxe.io.Path;
 import haxe.xml.Fast;
+import helpers.PathHelper;
+import helpers.ProcessHelper;
+import project.Haxelib;
 import sys.io.Process;
 import sys.FileSystem;
 
@@ -99,13 +102,15 @@ class Tools {
 			
 			var thread_var = mDefines.exists ("HXCPP_COMPILE_THREADS") ? mDefines.get ("HXCPP_COMPILE_THREADS") : Sys.getEnv ("HXCPP_COMPILE_THREADS");
 			
-			if (thread_var == null) {
+			if (thread_var != null) {
 				
-				thread_var = getNumberOfProcesses ();
+				threads = Std.parseInt (thread_var) < 2 ? 1 : Std.parseInt (thread_var);
+				
+			} else {
+				
+				threads = ProcessHelper.processorCores;
 				
 			}
-			
-			threads =  (thread_var == null || Std.parseInt(thread_var) < 2) ? 1 : Std.parseInt (thread_var);
 			
 		}
 		
@@ -125,7 +130,7 @@ class Tools {
 				
 				var path = new Path (mCompiler.mObjDir + "/" + file.mName);
 				var obj_name = path.dir + "/" + path.file + mCompiler.mExt;
-				DirManager.make (path.dir);
+				PathHelper.mkdir (path.dir);
 				objs.push (obj_name);
 				
 				if (file.isOutOfDate (obj_name)) {
@@ -528,95 +533,8 @@ class Tools {
 	}
 	
 	
-	public static function getHaxelib (library:String):String {
-		
-		var proc = new sys.io.Process ("haxelib", [ "path", library ]);
-		
-		var result = "";
-		try {
-			
-			while (true) {
-				
-				var line = proc.stdout.readLine ();
-				if (line.substr (0, 1) != "-") {
-					
-					result = line;
-					break;
-					
-				}
-				
-			}
-			
-		} catch (e:Dynamic) { };
-		
-		proc.close ();
-		
-		if (result == "") {
-			
-			throw ("Could not find haxelib path  " + library + " required by a source file.");
-			
-		}
-		
-		return result;
-		
-	}
-	
-	
 	// Setting HXCPP_COMPILE_THREADS to 2x number or cores can help with hyperthreading
-	public static function getNumberOfProcesses ():String {
-		
-		var env = Sys.getEnv ("NUMBER_OF_PROCESSORS");
-		if (env != null) {
-			
-			return env;
-			
-		}
-		
-		var result = null;
-		if (isLinux) {
-			
-			var proc = null;
-			proc = new Process ("nproc", []);
-			
-			try {
-				
-				result = proc.stdout.readLine ();
-				proc.close ();
-				
-			} catch (e:Dynamic) { }
-			
-		} else if (isMac) {
-			
-			var proc = new Process ("/usr/sbin/system_profiler", [ "-detailLevel", "full", "SPHardwareDataType" ]);	
-			var cores = ~/Total Number of Cores: (\d+)/;
-			
-			try {
-				
-				while (true) {
-					
-					var line = proc.stdout.readLine ();
-					if (cores.match (line)) {
-						
-						result = cores.matched (1);
-						break;
-						
-					}
-					
-				}
-				
-			} catch (e:Dynamic) { }
-			
-			if (proc != null) {
-				
-				proc.close ();
-				
-			}
-			
-		}
-		
-		return result;
-		
-	}
+	
 	
 	
 	// Process args and environment.
@@ -647,7 +565,7 @@ class Tools {
 				
 				// When called from haxelib, the last arg is the original directory, and
 				//  the current direcory is the library directory.
-				HXCPP = Sys.getCwd ();
+				HXCPP = PathHelper.standardize (Sys.getCwd ());
 				defines.set ("HXCPP", HXCPP);
 				args.pop ();
 				Sys.setCwd (last);
@@ -730,7 +648,7 @@ class Tools {
 		
 		if (HXCPP == "" && env.exists ("HXCPP")) {
 			
-			HXCPP = env.get ("HXCPP") + "/";
+			HXCPP = PathHelper.standardize (env.get ("HXCPP"));
 			defines.set ("HXCPP", HXCPP);
 			
 		}
@@ -743,7 +661,7 @@ class Tools {
 				
 			}
 			
-			HXCPP = defines.get ("HXCPP") + "/";
+			HXCPP = PathHelper.standardize (defines.get ("HXCPP"));
 			defines.set ("HXCPP", HXCPP);
 			
 		}
@@ -769,13 +687,13 @@ class Tools {
 		
 		if (defines.exists ("ios")) {
 			
-			if (defines.exists("simulator")) {
+			if (defines.exists ("simulator")) {
 				
-				defines.set("iphonesim", "iphonesim");
+				defines.set ("iphonesim", "iphonesim");
 				
 			} else if (!defines.exists ("iphonesim")) {
 				
-				defines.set("iphoneos", "iphoneos");
+				defines.set ("iphoneos", "iphoneos");
 				
 			}
 			
@@ -844,9 +762,9 @@ class Tools {
 			defines.set ("blackberry", "blackberry");
 			defines.set ("BINDIR", "BlackBerry");
 			
-		} else if (defines.exists("emcc") || defines.exists("emscripten")) {
+		} else if (defines.exists ("emcc") || defines.exists ("emscripten")) {
 			
-			defines.set("toolchain", "emscripten");
+			defines.set ("toolchain", "emscripten");
 			defines.set ("emcc", "emcc");
 			defines.set ("emscripten", "emscripten");
 			defines.set ("BINDIR", "Emscripten");
@@ -1179,21 +1097,6 @@ class Tools {
 	}
 	
 	
-	public static function runCommand (exe:String, args:Array<String>):Int {
-		
-		if (exe.indexOf (" ") > -1) {
-			
-			var splitExe = exe.split (" ");
-			exe = splitExe.shift ();
-			args = splitExe.concat (args);
-			
-		}
-		
-		return Sys.command (exe, args);
-		
-	}
-	
-	
 	public function substitute (str:String):String {
 		
 		while (mVarMatch.match (str)) {
@@ -1202,7 +1105,9 @@ class Tools {
 			
 			if (sub.substr (0, 8) == "haxelib:") {
 				
-				sub = getHaxelib (sub.substr (8));
+				var path = PathHelper.getHaxelib (new Haxelib (sub.substr (8)), true);
+				
+				sub = PathHelper.standardize (path);
 				
 			} else {
 				
