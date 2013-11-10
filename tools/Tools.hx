@@ -267,7 +267,7 @@ class Tools {
 		
 		if (inBase == null || inXML.has.replace) {
 			
-			c = new Compiler (inXML.att.id, inXML.att.exe, mDefines.exists ("USE_GCC_FILETYPES"));
+			c = new Compiler (substitute (inXML.att.id), substitute (inXML.att.exe), mDefines.exists ("USE_GCC_FILETYPES"));
 			
 			if (mDefines.exists ("USE_PRECOMPILED_HEADERS")) {
 				
