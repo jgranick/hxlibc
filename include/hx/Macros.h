@@ -765,7 +765,7 @@ int __stdcall WinMain( void * hInstance, void * hPrevInstance, const char *lpCmd
 
 #define HX_BEGIN_MAIN \
 \
-int main (int argc, char* pArgv[]){ \
+extern "C" EXPORT_EXTRA int OspMain (int argc, char* pArgv[]){ \
 	HX_TOP_OF_STACK \
 	hx::Boot(); \
 	try{ \
@@ -778,10 +778,6 @@ int main (int argc, char* pArgv[]){ \
 		printf("Error : %s\n",e->toString().__CStr()); \
 	} \
 	return 0; \
-} \
-\
-extern "C" EXPORT_EXTRA int OspMain (int argc, char* pArgv[]){ \
-	return main (argc, pArgv); \
 }
 
 

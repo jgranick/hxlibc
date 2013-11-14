@@ -20,6 +20,7 @@
 	<flag value="-I${HXCPP}/include"/>
 	<flag value="-I${TIZEN_PLATFORM}/usr/include"/>
 	<flag value="-DTIZEN"/>
+	<flag value="-D_APP_LOG"/>
 	<flag value="-march=armv7-a" />
 	<flag value="-mfloat-abi=softfp" />
 	<flag value="-mfpu=vfpv3-d16" />
@@ -41,7 +42,7 @@
 	<flag value="-O2" unless="debug"/>
 	<flag value="-s" unless="debug"/>
 	<!-- <flag value="-rdynamic"/> -->
-	<!-- <flag value="-pie" /> -->
+	<flag value="-pie" />
 	<lib name="-lpthread" />
 	<flag value="-march=armv7-a" />
 	<flag value="-mfloat-abi=softfp" />
@@ -49,15 +50,16 @@
 	<flag value="-mtune=cortex-a8" />
 	<flag value="-Xlinker" />
 	<flag value="--as-needed" />
-	<!-- <flag value="-Xlinker" />
-	<flag value="-rpath=/opt/usr/apps/DugJgh8Hxl/lib" /> -->
+	<flag value="-Xlinker" />
+	<flag value="-rpath=/opt/usr/apps/${APP_ID}/lib" />
 	<flag value="-Xlinker" />
 	<flag value="-rpath=/home/developer/sdk_tools/lib" />
 	<flag value="--sysroot=${TIZEN_PLATFORM}" />
 	<flag value="-L${TIZEN_PLATFORM}/usr/lib" />
 	<flag value="-L${TIZEN_PLATFORM}/usr/lib/osp" />
-	<flag value="-fpic"/>
-	<flag value="-fPIC"/>
+	<lib name="-losp-appfw" />
+	<!-- <flag value="-fpic"/>
+	<flag value="-fPIC"/> -->
 	<ext value=".exe"/>
 	<outflag value="-o"/>
 	<lib name="-ldl"/>
@@ -84,8 +86,9 @@
 	<flag value="-L${TIZEN_PLATFORM}/usr/lib" />
 	<flag value="-L${TIZEN_PLATFORM}/usr/lib/osp" />
 	<cppflag value="-frtti"/>
-	<flag value="-fpic"/>
-	<flag value="-fPIC"/>
+	<!-- <flag value="-fpic"/>
+	<flag value="-fPIC"/> -->
+	<!-- <flag value="-pie" /> -->
 	<lib name="-ldl"/>
 	<ext value=".so"/>
 	<outflag value="-o"/>
