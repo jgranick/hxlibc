@@ -785,6 +785,12 @@ class Tools {
 			defines.set ("emscripten", "emscripten");
 			defines.set ("BINDIR", "Emscripten");
 			
+		} else if (defines.exists ("tizen")) {
+			
+			defines.set ("toolchain", "tizen");
+			defines.set ("tizen", "tizen");
+			defines.set ("BINDIR", "Tizen");
+			
 		} else if (defines.exists ("gph")) {
 			
 			defines.set ("toolchain", "gph");
