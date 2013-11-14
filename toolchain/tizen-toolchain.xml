@@ -1,8 +1,10 @@
 <xml>
 
 <set name="TIZEN_SDK" value="C:/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" if="windows_host" />
-<set name="TIZEN_SDK" value="~/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" />
+<set name="TIZEN_SDK" value="/Users/joshua/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" if="mac_host" />
+<set name="TIZEN_SDK" value="/home/joshua/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" />
 <set name="TIZEN_PLATFORM" value="${TIZEN_SDK}/platforms/tizen2.2/rootstraps/tizen-device-2.2.native" />
+
 
 <path name="${TIZEN_SDK}/tools/arm-linux-gnueabi-gcc-4.5/bin" />
  
