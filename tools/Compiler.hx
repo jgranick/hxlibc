@@ -141,7 +141,11 @@ class Compiler {
 		
 		Sys.println (mExe + " " + args.join (" "));
 		
-		var result = ProcessHelper.runCommand ("", mExe, args);
+		var split = mExe.split (" ");
+		var exe = split.shift ();
+		args = split.concat (args);
+		
+		var result = ProcessHelper.runCommand ("", exe, args);
 		
 		if (result != 0) {
 			
@@ -201,6 +205,10 @@ class Compiler {
 		
 		Sys.println ("Creating " + pch_name + "...");
 		Sys.println (mExe + " " + args.join (" "));
+		
+		var split = mExe.split (" ");
+		var exe = split.shift ();
+		args = split.concat (args);
 		
 		var result = ProcessHelper.runCommand ("", mExe, args);
 		

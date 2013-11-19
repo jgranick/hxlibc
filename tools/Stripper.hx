@@ -27,6 +27,10 @@ class Stripper {
 		
 		Sys.println (mExe + " " + args.join (" "));
 		
+		var split = mExe.split (" ");
+		var exe = split.shift ();
+		args = split.concat (args);
+		
 		var result = ProcessHelper.runCommand ("", mExe, args);
 		
 		if (result != 0) {
