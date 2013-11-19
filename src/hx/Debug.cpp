@@ -43,7 +43,9 @@ static void CriticalErrorHandler(String inErr, bool allowFixup);
 
 // These are emitted elsewhere by the haxe compiler
 extern const char *__hxcpp_all_files[];
+#if defined(HAXE_VERSION) && HAXE_VERSION > 3001
 extern const char *__hxcpp_all_classes[];
+#endif
 
 // This global boolean is set whenever there are any breakpoints (normal or
 // immediate), and can relatively quickly gate debugged threads from making
@@ -1501,11 +1503,13 @@ private:
 
     static const char *LookupClassName(String className)
          {
+         #if defined(HAXE_VERSION) && HAXE_VERSION > 3001
         for (const char **ptr = hx::__hxcpp_all_classes; *ptr; ptr++) {
             if (!strcmp(*ptr, className)) {
                 return *ptr;
          }
       }
+      #endif
         return 0;
    }
 
@@ -1579,11 +1583,11 @@ Array<Dynamic> __hxcpp_dbg_getFiles()
 Array<Dynamic> __hxcpp_dbg_getClasses()
    {
     Array< ::String> ret = Array_obj< ::String>::__new();
-
+#if defined(HAXE_VERSION) && HAXE_VERSION > 3001
     for (const char **ptr = hx::__hxcpp_all_classes; *ptr; ptr++) {
         ret->push(String(*ptr));
             }
-
+#endif
     return ret;
    }
 

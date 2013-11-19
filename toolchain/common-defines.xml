@@ -1,5 +1,4 @@
 <xml>
- <flag value="-D__HAXE__=${haxe_ver}" if="haxe_ver"/>
  <flag value="-DHXCPP_DEBUG" if="debug"/>
  <flag value="-DSTATIC_LINK" if="static_link"/>
  <flag value="-DHXCPP_M64" if="HXCPP_M64"/>
