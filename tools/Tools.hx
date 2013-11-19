@@ -705,6 +705,8 @@ class Tools {
 				
 			}
 			
+			defines.set ("iphone", "iphone");
+			
 		}
 		
 		if (defines.exists ("toolchain")) {
