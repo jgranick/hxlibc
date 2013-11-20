@@ -152,7 +152,7 @@ class Linker {
 			var exe = split.shift ();
 			args = split.concat (args);
 			
-			var result = ProcessHelper.runCommand ("", mExe, args);
+			var result = ProcessHelper.runCommand ("", exe, args);
 			
 			if (result != 0) {
 				
