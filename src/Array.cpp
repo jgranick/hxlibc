@@ -44,7 +44,7 @@ void ArrayBase::EnsureSize(int inSize) const
             mBase = (char *)hx::NewGCBytes(0,bytes);
          }
       }
-      length = s;
+      //length = s;
    }
 }
 

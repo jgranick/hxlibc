@@ -239,7 +239,7 @@ public:
 
    inline ELEM_ &Item(int inIndex)
    {
-      if (inIndex>=(int)length) EnsureSize(inIndex+1);
+      if (inIndex>=(int)length) { EnsureSize(inIndex+1); length=inIndex+1; }
       else if (inIndex<0) { return * hx::NewNull<ELEM_>(); }
       return * (ELEM_ *)(mBase + inIndex*sizeof(ELEM_));
    }
@@ -301,6 +301,7 @@ public:
       int l = length;
       EnsureSize((int)l+1);
       * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal;
+      length = (int)l+1;
       return length;
    }
    inline NullType pop( )
