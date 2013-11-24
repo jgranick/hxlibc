@@ -2254,6 +2254,7 @@ public:
       Reset();
    }
 
+
    int mCurrentPos;
    int mCurrentLine;
 

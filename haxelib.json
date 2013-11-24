@@ -1,13 +1,12 @@
 {
-  "name": "hxcpp",
-  "url": "http://gamehaxe.com/",
-  "license": "BSD",
+  "name": "hxlibc",
+  "url": "https://github.com/openfl/hxlibc",
+  "license": "MIT",
   "tags": [],
-  "description": "Hxcpp is the runtime support for the c++ backend of the haxe compiler.  This release constains the headers, libries and support code required to generate a fully compiled executable from haxe code.",
-  "version": "3.0",
-  "releasenote": "See Changes.txt",
-  "contributors": ["gamehaxe"],
-  "binaryversion": 1,
+  "description": "hxlibc is an alternative Haxe C++ backend",
+  "version": "1.0.0",
+  "releasenote": "Initial release",
+  "contributors": ["singmajesty"],
   "dependencies": {
 
   }
