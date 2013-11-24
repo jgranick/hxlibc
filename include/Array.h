@@ -629,4 +629,3 @@ Dynamic Array_obj<ELEM_>::map(Dynamic inFunc)
 
 
 #endif
-
