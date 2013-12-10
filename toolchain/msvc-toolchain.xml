@@ -53,7 +53,7 @@
   <flag value="-Oy-"/>
   <flag value="-c"/>
   <flag value="-EHs"/>
-  <flag value="-FS" if="HXCPP_FORCE_PDB_SERVER" />
+  <flag value="-FS" if="MSVC18+" />
   <flag value="-I${HXCPP}/include"/>
   <include name="common-defines.xml" />
   <flag value="-D_CRT_SECURE_NO_DEPRECATE"/>
