@@ -835,8 +835,6 @@ class Tools {
 				
 			}
 			
-			Setup.setupMSVC (defines, m64);
-			
 		} else if (isRPi) {
 			
 			defines.set ("toolchain", "linux");
