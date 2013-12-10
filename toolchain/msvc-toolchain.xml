@@ -64,7 +64,7 @@
   <objdir value="obj/mscv${MSVC_VER}${OBJEXT}${OBJCACHE}${XPOBJ}" unless="winrt" />
   <objdir value="obj/mscv${MSVC_VER}-rt${OBJEXT}${OBJCACHE}${XPOBJ}" if="winrt" />
 
-  <getversion value="cl.exe"/>
+  <!-- <getversion value="cl.exe"/> -->
 </compiler>
 
 <linker id="dll" exe="link.exe" if="windows">

@@ -368,7 +368,7 @@ class Setup {
 						output.push (str);
 						
 					} else {
-					
+						
 						var pos = str.indexOf ("=");
 						var name = str.substr (0, pos);
 						
@@ -383,7 +383,7 @@ class Setup {
 						}
 						
 					}
-						
+					
 				}
 				
 			} catch (e:Dynamic) { }
