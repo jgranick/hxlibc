@@ -4,8 +4,8 @@
   "license": "MIT",
   "tags": [],
   "description": "hxlibc is an alternative Haxe C++ backend",
-  "version": "1.0.0",
-  "releasenote": "Initial release",
+  "version": "1.1.0",
+  "releasenote": "Added Tizen support",
   "contributors": ["singmajesty"],
   "dependencies": {
 
