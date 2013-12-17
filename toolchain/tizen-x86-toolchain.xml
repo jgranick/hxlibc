@@ -30,7 +30,7 @@
 	<!-- <flag value="-fPIE" /> -->
 	<flag value="--sysroot=${TIZEN_PLATFORM}" />
 	<outflag value="-o"/>
-	<objdir value="./obj/tizen${OBJEXT}" />
+	<objdir value="./obj/tizensim${OBJEXT}" />
 </compiler>
 
 <linker id="exe" exe="i386-linux-gnueabi-g++" if="tizen">
