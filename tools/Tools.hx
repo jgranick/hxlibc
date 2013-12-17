@@ -700,6 +700,12 @@ class Tools {
 		var m64 = defines.exists ("HXCPP_M64");
 		var msvc = false;
 		
+		if (defines.exists ("emulator")) {
+			
+			defines.set ("simulator", "simulator");
+			
+		}
+		
 		if (defines.exists ("ios")) {
 			
 			if (defines.exists ("simulator")) {
@@ -796,7 +802,16 @@ class Tools {
 			
 		} else if (defines.exists ("tizen")) {
 			
-			defines.set ("toolchain", "tizen");
+			if (defines.exists ("simulator")) {
+				
+				defines.set ("toolchain", "tizen-x86");
+				
+			} else {
+				
+				defines.set ("toolchain", "tizen");
+				
+			}
+			
 			defines.set ("tizen", "tizen");
 			defines.set ("BINDIR", "Tizen");
 			

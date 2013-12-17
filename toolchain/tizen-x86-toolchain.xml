@@ -3,19 +3,17 @@
 <set name="TIZEN_SDK" value="C:/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" if="windows_host" />
 <set name="TIZEN_SDK" value="/Users/joshua/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" if="mac_host" />
 <set name="TIZEN_SDK" value="/home/joshua/Development/Tizen/tizen-sdk" unless="TIZEN_SDK" />
-<set name="TIZEN_PLATFORM" value="${TIZEN_SDK}/platforms/tizen2.2/rootstraps/tizen-device-2.2.native" unless="emulator" />
-<set name="TIZEN_PLATFORM" value="${TIZEN_SDK}/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native" if="emulator" />
+<set name="TIZEN_PLATFORM" value="${TIZEN_SDK}/platforms/tizen2.2/rootstraps/tizen-emulator-2.2.native" />
 
 
-<path name="${TIZEN_SDK}/tools/arm-linux-gnueabi-gcc-4.5/bin" />
+<path name="${TIZEN_SDK}/tools/i386-linux-gnueabi-gcc-4.5/bin" />
  
 <include name="gcc-toolchain.xml"/>
 
 
 <!-- TIZEN TOOLS -------------------------------------------------->
 	
-<compiler id="tizen" exe="arm-linux-gnueabi-g++" if="tizen">
-	<exe value="i386-linux-gnueabi-gcc-4.5" if="emulator" />
+<compiler id="tizen" exe="i386-linux-gnueabi-g++" if="tizen">
 	<flag value="-c"/>
 	<flag value="-g" if="debug"/>
 	<flag value="-O2" unless="debug"/>
@@ -23,10 +21,6 @@
 	<flag value="-I${TIZEN_PLATFORM}/usr/include"/>
 	<flag value="-DTIZEN"/>
 	<flag value="-D_APP_LOG"/>
-	<flag value="-march=armv7-a" unless="emulator" />
-	<flag value="-mfloat-abi=softfp" unless="emulator" />
-	<flag value="-mfpu=vfpv3-d16" unless="emulator" />
-	<flag value="-mtune=cortex-a8" unless="emulator" />
 	<include name="common-defines.xml" />
 	<flag value="-fvisibility=hidden"/>
 	<flag value="-fdollars-in-identifiers"/>
@@ -39,17 +33,13 @@
 	<objdir value="./obj/tizen${OBJEXT}" />
 </compiler>
 
-<linker id="exe" exe="arm-linux-gnueabi-g++" if="tizen">
+<linker id="exe" exe="i386-linux-gnueabi-g++" if="tizen">
 	<flag value="-g" if="debug"/>
 	<flag value="-O2" unless="debug"/>
 	<flag value="-s" unless="debug"/>
 	<!-- <flag value="-rdynamic"/> -->
 	<flag value="-pie" />
 	<lib name="-lpthread" />
-	<flag value="-march=armv7-a" unless="emulator" />
-	<flag value="-mfloat-abi=softfp" unless="emulator" />
-	<flag value="-mfpu=vfpv3-d16" unless="emulator" />
-	<flag value="-mtune=cortex-a8" unless="emulator" />
 	<flag value="-Xlinker" />
 	<flag value="--as-needed" />
 	<flag value="-Xlinker" />
@@ -67,17 +57,13 @@
 	<lib name="-ldl"/>
 </linker>
 	
-<linker id="dll" exe="arm-linux-gnueabi-g++" if="tizen">
+<linker id="dll" exe="i386-linux-gnueabi-g++" if="tizen">
 	<flag value="-shared"/>
 	<flag value="-g" if="debug"/>
 	<flag value="-O2" unless="debug"/>
 	<flag value="-s" unless="debug"/>
 	<!-- <flag value="-pie" /> -->
 	<lib name="-lpthread" />
-	<flag value="-march=armv7-a" unless="emulator" />
-	<flag value="-mfloat-abi=softfp" unless="emulator" />
-	<flag value="-mfpu=vfpv3-d16" unless="emulator" />
-	<flag value="-mtune=cortex-a8" unless="emulator" />
 	<flag value="-Xlinker" />
 	<flag value="--as-needed" />
 	<!--<flag value="-Xlinker" />
