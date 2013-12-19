@@ -446,13 +446,13 @@ class Setup {
 						
 					}
 					
+					//Sys.println ("Using cl version: " + cl_version);
+					
 				}
 				
 			}
 			
 		} catch (e:Dynamic) { }
-		
-		//if (cl_version!="") Sys.println("Using cl version: " + cl_version);
 		
 	}
 	
