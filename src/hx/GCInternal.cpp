@@ -2038,7 +2038,7 @@ class LocalAllocator
 public:
    LocalAllocator(int *inTopOfStack=0)
    {
-      mTopOfStack = inTopOfStack;
+      mTopOfStack = mBottomOfStack = inTopOfStack;
       mRegisterBufSize = 0;
       mGCFreeZone = false;
       mStackLocks = 0;
@@ -2061,7 +2061,7 @@ public:
 
    void AttachThread(int *inTopOfStack)
    {
-      mTopOfStack = inTopOfStack;
+      mTopOfStack = mBottomOfStack = inTopOfStack;
       mRegisterBufSize = 0;
       mStackLocks = 0;
       #ifdef HX_WINDOWS
@@ -2328,7 +2328,10 @@ public:
    void Mark(hx::MarkContext *__inCtx)
    {
       if (!mTopOfStack)
+      {
+         Reset();
          return;
+      }
 
       #ifdef SHOW_MEM_EVENTS
       //int here = 0;

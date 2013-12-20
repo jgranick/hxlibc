@@ -357,7 +357,7 @@ void *__hxcpp_get_proc_address(String inLib, String full_name,bool inNdllProc)
 #elif defined(EMSCRIPTEN)
 	HX_CSTRING("Emscripten");
 #elif defined(TIZEN)
-	HX_CSTRING("Tizen");
+    HX_CSTRING("Tizen");
 #elif defined(IPHONESIM)
     HX_CSTRING("IPhoneSim");
 #elif defined(IPHONEOS)
