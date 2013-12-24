@@ -766,18 +766,18 @@ int __stdcall WinMain( void * hInstance, void * hPrevInstance, const char *lpCmd
 #define HX_BEGIN_MAIN \
 \
 extern "C" EXPORT_EXTRA int OspMain (int argc, char* pArgv[]){ \
-	HX_TOP_OF_STACK \
-	hx::Boot(); \
-	try{ \
-		__boot_all();
+        HX_TOP_OF_STACK \
+        hx::Boot(); \
+        try{ \
+                __boot_all();
 
 #define HX_END_MAIN \
-	} \
-	catch (Dynamic e){ \
-		__hx_dump_stack(); \
-		printf("Error : %s\n",e->toString().__CStr()); \
-	} \
-	return 0; \
+        } \
+        catch (Dynamic e){ \
+                __hx_dump_stack(); \
+                printf("Error : %s\n",e->toString().__CStr()); \
+        } \
+        return 0; \
 }
 
 
