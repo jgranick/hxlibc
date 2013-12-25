@@ -269,13 +269,6 @@ class Tools {
 			
 			c = new Compiler (substitute (inXML.att.id), substitute (inXML.att.exe), mDefines.exists ("USE_GCC_FILETYPES"));
 			
-			if (mDefines.exists ("haxe_ver")) {
-				
-				c.mFlags.push ("-D__HAXE__");
-				c.mFlags.push ("-DHAXE_VERSION=" + StringTools.replace (mDefines.get ("haxe_ver"), ".", "0"));
-				
-			}
-			
 			if (mDefines.exists ("USE_PRECOMPILED_HEADERS")) {
 				
 				c.setPCH (mDefines.get ("USE_PRECOMPILED_HEADERS"));
