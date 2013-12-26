@@ -1168,23 +1168,89 @@ class Tools {
 	}
 	
 	
-	public function valid (inEl:Fast, inSection:String):Bool {
+	public function valid (element:Fast, section:String):Bool {
 		
-		if (inEl.x.get ("if") != null && !defined (inEl.x.get ("if"))) {
+		if (element.x.get ("if") != null) {
 			
-			return false;
+			var value = element.x.get ("if");
+			var optionalDefines = value.split ("||");
+			var matchOptional = false;
+			
+			for (optional in optionalDefines) {
+				
+				var requiredDefines = optional.split (" ");
+				var matchRequired = true;
+				
+				for (required in requiredDefines) {
+					
+					var check = StringTools.trim (required);
+					
+					if (check != "" && !defined (check)) {
+						
+						matchRequired = false;
+						
+					}
+					
+				}
+				
+				if (matchRequired) {
+					
+					matchOptional = true;
+					
+				}
+				
+			}
+			
+			if (optionalDefines.length > 0 && !matchOptional) {
+				
+				return false;
+				
+			}
 			
 		}
 		
-		if (inEl.has.unless && defined (inEl.att.unless)) {
+		if (element.has.unless) {
 			
-			return false;
+			var value = substitute (element.att.unless);
+			var optionalDefines = value.split ("||");
+			var matchOptional = false;
+			
+			for (optional in optionalDefines) {
+				
+				var requiredDefines = optional.split (" ");
+				var matchRequired = true;
+				
+				for (required in requiredDefines) {
+					
+					var check = StringTools.trim (required);
+					
+					if (check != "" && !defined (check)) {
+						
+						matchRequired = false;
+						
+					}
+					
+				}
+				
+				if (matchRequired) {
+					
+					matchOptional = true;
+					
+				}
+				
+			}
+			
+			if (optionalDefines.length > 0 && matchOptional) {
+				
+				return false;
+				
+			}
 			
 		}
 		
-		if (inSection != "") {
+		if (section != "") {
 			
-			if (inEl.name != "section" || !inEl.has.id || inEl.att.id != inSection) {
+			if (element.name != "section" || !element.has.id || substitute (element.att.id) != section) {
 				
 				return false;
 				
