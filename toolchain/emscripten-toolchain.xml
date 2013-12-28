@@ -1,5 +1,7 @@
 <xml>
 
+<setenv name="EMCC_LLVM_TARGET" value="i386-pc-linux-gnu" />
+
 <!-- EMCC TOOLS -------------------------------------->
 
 <include name="gcc-toolchain.xml"/>
