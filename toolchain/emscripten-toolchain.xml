@@ -13,6 +13,8 @@
   <flag value="-c"/>
   <flag value="-fvisibility=hidden"/>
   <cppflag value="-frtti"/>
+  <pchflag value="-x" />
+  <pchflag value="c++-header" />
   <flag value="-g" if="debug"/>
   <!-- <flag value="-O2" unless="debug"/> -->
   <flag value="-fpic"/>
